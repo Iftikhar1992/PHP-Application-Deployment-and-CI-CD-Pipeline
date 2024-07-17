@@ -18,7 +18,7 @@ jobs:
 
       - name: Build and push PHP app Docker image
         run: |
-          docker build -t ifti1992/php-app:latest ./php-app
+          docker build -t ifti1992/php-app:latest ./php-app 
           docker push ifti1992/php-app:latest
 
       - name: Build and push MySQL Docker image
