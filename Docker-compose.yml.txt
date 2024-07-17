@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  php-app:
+    build:
+      context: ./php-app
+    ports:
+      - "8080:80"
+    volumes:
+      - ./php-app:/var/www/html
+
+  mysql-db:
+    build:
+      context: ./mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: blog
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  mysql-data:
