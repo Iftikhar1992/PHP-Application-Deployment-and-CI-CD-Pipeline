@@ -1,24 +1,24 @@
 name: Build and Push Docker Image
-'on':
+
+on:
   push:
     branches:
-      - main
+      - main  # Define the branch to trigger the workflow on push events
+
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
       - name: Login to Docker Hub
-        run: >
-          echo "${{ secrets.DOCKERHUB_USERNAME }}" | docker login -u "${{
-          secrets.DOCKERHUB_USERNAME }}" --password-stdin
-        env:
-          DOCKERHUB_USERNAME: ifti1992
-          DOCKERHUB_PASSWORD: Iftikhar@123
+        run: |
+          echo "Iftikhar@123" | docker login -u "ifti1992" --password-stdin
+
       - name: Build and push Docker image
         env:
-          IMAGE_NAME: 'ifti1992/php-app:latest'
+          IMAGE_NAME: ifti1992/php-app:latest
         run: |
           docker build -t $IMAGE_NAME .
           docker push $IMAGE_NAME
