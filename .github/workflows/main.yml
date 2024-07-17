@@ -1,0 +1,27 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - main  # Define the branch to trigger the workflow on push events
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Login to Docker Hub
+        run: |
+          echo "Iftikhar@123" | docker login -u "ifti1992" --password-stdin
+
+      - name: Build and push PHP app Docker image
+        run: |
+          docker build -t ifti1992/php-app:latest ./php-app
+          docker push ifti1992/php-app:latest
+
+      - name: Build and push MySQL Docker image
+        run: |
+          docker build -t ifti1992/mysql:latest ./mysql
+          docker push ifti1992/mysql:latest
